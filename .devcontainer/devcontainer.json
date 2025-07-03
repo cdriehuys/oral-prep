@@ -9,13 +9,5 @@
 		"ORALPREP_DEBUG": "true"
 	},
 
-	"customizations": {
-		"vscode": {
-			"settings": {
-				"python.defaultInterpreterPath": ".venv/bin/python"
-			}
-		}
-	},
-
 	"postCreateCommand": "uv sync"
 }

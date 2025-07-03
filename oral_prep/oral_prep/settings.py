@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "quiz",
 ]
 
 MIDDLEWARE = [
@@ -111,6 +112,13 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 
 USE_TZ = True
+
+
+# Media files
+
+MEDIA_ROOT = os.environ.get("ORALPREP_MEDIA_ROOT", BASE_DIR / "media")
+
+MEDIA_URL = "/media/"
 
 
 # Static files (CSS, JavaScript, Images)

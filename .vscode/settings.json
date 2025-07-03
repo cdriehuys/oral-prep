@@ -1,0 +1,4 @@
+{
+    "python.analysis.extraPaths": ["oral_prep"],
+    "python.defaultInterpreterPath": ".venv/bin/python"
+}
