@@ -1,9 +1,14 @@
 {% extends 'base.html' %}
+{% load markdown_extras %}
 
 {% block content %}
-  <h1>Hello, World!</h1>
   <h2>Question</h2>
-  <pre>{{ question.question }}</pre>
+  <div>{{ question.question | markdown | safe }}</div>
+
+  {% if question.image %}
+  <img width="{{ question.image.width }}" height="{{ question.image.height }}" src="{{ question.image.url }}">
+  {% endif %}
+
   <h2>Answer</h2>
-  <pre>{{ question.answer }}</pre>
+  <div>{{ question.answer | markdown | safe }}</div>
 {% endblock %}
