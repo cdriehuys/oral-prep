@@ -5,8 +5,14 @@
 }
 
 :root {
+  --container-width: 70rem;
+
   --font-family-body: 'Open Sans', sans-serif;
   --font-family-headings: 'Roboto', sans-serif;
+
+  --spacing-sm: .5em;
+  --spacing-md: 1em;
+  --spacing-lg: 2em;
 }
 
 body {
@@ -15,4 +21,26 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-family-headings);
+}
+
+.container {
+  max-width: var(--container-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section {
+  margin-bottom: var(--spacing-lg);
+}
+
+.subtitle {
+  font-size: 1.75em;
+  font-weight: normal;
+  margin-bottom: var(--spacing-sm);
+}
+
+.title {
+  font-size: 2em;
+  font-weight: normal;
+  margin-bottom: var(--spacing-md);
 }

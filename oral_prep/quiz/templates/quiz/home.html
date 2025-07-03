@@ -1,14 +1,27 @@
 {% extends 'base.html' %}
 {% load markdown_extras %}
 
+{% block title %}Home{% endblock %}
+
 {% block content %}
-  <h2>Question</h2>
-  <div>{{ question.question | markdown | safe }}</div>
+  <main class="container">
+    <h1 class="title">Oral Exam Prep</h1>
 
-  {% if question.image %}
-  <img width="{{ question.image.width }}" height="{{ question.image.height }}" src="{{ question.image.url }}">
-  {% endif %}
+    <section class="section">
+      <h2 class="subtitle">Question</h2>
+      <div class="markdown">{{ question.question | markdown | safe }}</div>
 
-  <h2>Answer</h2>
-  <div>{{ question.answer | markdown | safe }}</div>
+      {% if question.image %}
+      <img width="{{ question.image.width }}" height="{{ question.image.height }}" src="{{ question.image.url }}">
+      {% endif %}
+    </section>
+
+    <section class="section">
+      <h2 class="subtitle">Answer</h2>
+      <details>
+        <summary>Show Answer</summary>
+        {{ question.answer | markdown | safe }}
+      </details>
+    </section>
+  </main>
 {% endblock %}
