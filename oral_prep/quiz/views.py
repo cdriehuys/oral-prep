@@ -3,7 +3,7 @@ import random
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
-from quiz import models
+from quiz import forms, models
 
 
 @login_required
@@ -15,3 +15,19 @@ def home_view(req):
     context = {"question": question}
 
     return render(req, template_name="quiz/home.html", context=context)
+
+
+@login_required
+def preferences_view(request):
+    preferences = models.Preferences.for_user(request.user)
+
+    if request.method == "POST":
+        form = forms.PreferencesForm(request.POST, instance=preferences)
+        if form.is_valid():
+            form.save()
+    else:
+        form = forms.PreferencesForm(instance=preferences)
+
+    context = {"form": form}
+
+    return render(request, template_name="quiz/preferences.html", context=context)

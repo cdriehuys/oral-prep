@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Preferences{% endblock title %}
+
+{% block content %}
+  <main class="container">
+    <h1 class="title">Preferences</h1>
+
+    <form method="POST">
+      {% csrf_token %}
+
+      <h2 class="subtitle">Certificate</h2>
+      <p>
+        Select the level of certificate for which you are studying. Private
+        limits the questions to only those expected to be answered on a private
+        oral exam. Commercial provides those same questions, but adds questions
+        which are specific to the commercial oral exam. The default is PRIVATE.
+      </p>
+
+      <div>
+        {{ form.certificate_type.as_field_group }}
+      </div>
+
+      <h2 class="subtitle">Aircraft Type</h2>
+      <p>
+        Select the type aircraft for which you wish to receive questions.
+        Selecting NONE will cause the system to NOT deliver type-specific
+        questions whereas selecting ALL will get you anything and everything.
+        The default is NONE.
+      </p>
+
+      <div>
+        {{ form.plane_type.as_field_group }}
+      </div>
+
+      <button class="btn btn--primary">Save</button>
+    </form>
+{% endblock content %}

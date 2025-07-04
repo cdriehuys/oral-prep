@@ -17,6 +17,8 @@
   <body>
     <header>
       {% if request.user.is_authenticated %}
+      <a href='{% url "home" %}'>Home</a>
+      <a href='{% url "preferences" %}'>Preferences</a>
       <form action='{% url "account_logout" %}' method="POST">
         {% csrf_token %}
         <button type="submit">Log Out</button>
