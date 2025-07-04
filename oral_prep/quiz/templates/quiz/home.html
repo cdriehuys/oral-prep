@@ -8,7 +8,10 @@
     <h1 class="title">Oral Exam Prep</h1>
 
     <section class="section">
-      <h2 class="subtitle">Question</h2>
+      <div class="row">
+        <h2 class="subtitle">Question</h2>
+        <a class="btn btn--primary" href='{% url "home" %}'>New</a>
+      </div>
       <div class="markdown">{{ question.question | markdown | safe }}</div>
 
       {% if question.image %}

@@ -5,11 +5,15 @@
 }
 
 :root {
+  --color-primary: #1961ab;
+  --color-primary-text: white;
+
   --container-width: 70rem;
 
   --font-family-body: 'Open Sans', sans-serif;
   --font-family-headings: 'Roboto', sans-serif;
 
+  --spacing-xs: .25em;
   --spacing-sm: .5em;
   --spacing-md: 1em;
   --spacing-lg: 2em;
@@ -28,6 +32,19 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-family-headings);
 }
 
+.btn {
+  background: none;
+  border: none;
+  display: block;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  text-decoration: none;
+}
+
+.btn--primary {
+  background: var(--color-primary);
+  color: var(--color-primary-text);
+}
+
 .container {
   max-width: var(--container-width);
   margin-left: auto;
@@ -36,6 +53,12 @@ h1, h2, h3, h4, h5, h6 {
 
 .markdown li {
   list-style-position: inside;
+}
+
+.row {
+  align-items: center;
+  display: flex;
+  gap: var(--spacing-md);
 }
 
 .section {
