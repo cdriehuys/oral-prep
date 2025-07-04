@@ -13,7 +13,11 @@
             ],
             "django": true,
             "autoStartBrowser": false,
-            "program": "${workspaceFolder}/oral_prep/manage.py"
+            "program": "${workspaceFolder}/oral_prep/manage.py",
+            "env": {
+                "ORALPREP_DISABLE_PASSWORD_VALIDATION": "true",
+                "ORALPREP_EMAIL_CONSOLE": "true"
+            }
         }
     ]
 }
