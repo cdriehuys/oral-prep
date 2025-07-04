@@ -19,6 +19,11 @@ body {
   font-family: var(--font-family-body);
 }
 
+details > summary {
+  cursor: pointer;
+  margin-bottom: var(--spacing-md);
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-family-headings);
 }
@@ -27,6 +32,10 @@ h1, h2, h3, h4, h5, h6 {
   max-width: var(--container-width);
   margin-left: auto;
   margin-right: auto;
+}
+
+.markdown li {
+  list-style-position: inside;
 }
 
 .section {
