@@ -2,9 +2,9 @@
 
 import json
 from pathlib import Path
+
 from django.core.files import File
 from django.db import migrations
-
 
 DATA_PATH = Path(__file__).resolve().parent.parent.parent.parent / "data"
 QUESTIONS = DATA_PATH / "questions.json"
@@ -25,7 +25,7 @@ def import_data(apps, _):
             plane_type=question["type"],
             question=question["question"],
             answer=question["answer"],
-            import_id=question["questionId"]
+            import_id=question["questionId"],
         )
 
         if question["imageFile"] is not None:
@@ -46,11 +46,8 @@ def remove_data(apps, _):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("quiz", "0001_initial"),
     ]
 
-    operations = [
-        migrations.RunPython(import_data, remove_data)
-    ]
+    operations = [migrations.RunPython(import_data, remove_data)]

@@ -10,3 +10,15 @@ dependencies = [
     "markdown>=3.8.2",
     "pillow>=11.3.0",
 ]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.2.0",
+    "ruff>=0.12.2",
+]
+
+[tool.ruff.lint]
+extend-select = [
+    # isort
+    "I"
+]

@@ -1,4 +1,9 @@
 {
     "python.analysis.extraPaths": ["oral_prep"],
-    "python.defaultInterpreterPath": ".venv/bin/python"
+    "python.defaultInterpreterPath": ".venv/bin/python",
+
+    "[python]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "charliermarsh.ruff"
+    }
 }

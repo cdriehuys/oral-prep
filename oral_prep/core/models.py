@@ -1,9 +1,13 @@
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth.models import (
+    AbstractBaseUser,
+    BaseUserManager,
+    PermissionsMixin,
+)
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-class UserManager(BaseUserManager):
 
+class UserManager(BaseUserManager):
     def create_user(self, email: str, password: str = None) -> "User":
         user = User(email=email)
         user.set_password(password)

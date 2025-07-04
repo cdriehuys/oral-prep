@@ -9,5 +9,14 @@
 		"ORALPREP_DEBUG": "true"
 	},
 
-	"postCreateCommand": "uv sync"
+	"postCreateCommand": "uv sync && uv run pre-commit install",
+
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"batisteo.vscode-django",
+				"charliermarsh.ruff"
+			]
+		}
+	}
 }
