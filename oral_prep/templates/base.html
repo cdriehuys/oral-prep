@@ -1,3 +1,4 @@
+{% load nav_extras %}
 {% load static %}
 
 <!doctype html>
@@ -15,15 +16,23 @@
   </head>
 
   <body>
-    <header>
-      {% if request.user.is_authenticated %}
-      <a href='{% url "home" %}'>Home</a>
-      <a href='{% url "preferences" %}'>Preferences</a>
-      <form action='{% url "account_logout" %}' method="POST">
-        {% csrf_token %}
-        <button type="submit">Log Out</button>
-      </form>
-      {% endif %}
+    <header class="section">
+      <nav class="container">
+        <ul class="navlinks">
+          {% if request.user.is_authenticated %}
+          {% navlink "Home" "home" %}
+          {% navlink "Preferences" "preferences" %}
+          <span class="navlink--spacer"></span>
+          <li class="navlink">{{ request.user.get_short_name }}</li>
+          <li class="navlink">
+            <form action='{% url "account_logout" %}' method="POST">
+              {% csrf_token %}
+              <button type="submit">Log Out</button>
+            </form>
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
     </header>
 
     {% block content %}{% endblock %}

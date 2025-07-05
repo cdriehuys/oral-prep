@@ -55,6 +55,36 @@ h1, h2, h3, h4, h5, h6 {
   list-style-position: inside;
 }
 
+.navlink {
+  display: block;
+}
+
+.navlink a,
+.navlink button {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1.15em;
+  text-decoration: none;
+}
+
+.navlink--active {
+  border-bottom: 3px solid var(--color-primary);
+}
+
+.navlink--spacer {
+  flex-grow: 1;
+}
+
+.navlinks {
+  align-items: center;
+  display: flex;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) 0;
+}
+
 .row {
   align-items: center;
   display: flex;

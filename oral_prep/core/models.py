@@ -37,3 +37,10 @@ class User(PermissionsMixin, AbstractBaseUser):
     @property
     def is_active(self):
         return True
+
+    def get_short_name(self) -> str:
+        email_parts = self.email.split("@", 1)
+        if email_parts:
+            return email_parts[0]
+
+        return self.email
