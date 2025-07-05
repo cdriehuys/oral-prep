@@ -85,6 +85,15 @@ h1, h2, h3, h4, h5, h6 {
   padding: var(--spacing-md) 0;
 }
 
+.prose {
+  line-height: 1.618;
+  margin-bottom: var(--spacing-md);
+}
+
+.prose a {
+  color: var(--color-primary);
+}
+
 .row {
   align-items: center;
   display: flex;

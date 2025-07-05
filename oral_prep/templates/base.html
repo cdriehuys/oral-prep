@@ -22,6 +22,9 @@
           {% if request.user.is_authenticated %}
           {% navlink "Home" "home" %}
           {% navlink "Preferences" "preferences" %}
+          {% endif %}
+          {% navlink "About" "about" %}
+          {% if request.user.is_authenticated %}
           <span class="navlink--spacer"></span>
           <li class="navlink">{{ request.user.get_short_name }}</li>
           <li class="navlink">

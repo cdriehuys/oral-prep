@@ -6,6 +6,10 @@ from django.shortcuts import render
 from quiz import forms, models
 
 
+def about_view(request):
+    return render(request, template_name="quiz/about.html")
+
+
 @login_required
 def home_view(req):
     preferences = models.Preferences.for_user(req.user)
