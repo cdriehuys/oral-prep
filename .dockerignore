@@ -1,0 +1,14 @@
+.devcontainer
+.gitignore
+.pre-commit-config.yaml
+.ruff_cache
+.venv
+.vscode
+Dockerfile
+
+__pycache__
+*.pyc
+
+oral_prep/db.sqlite3
+oral_prep/media
+oral_prep/staticfiles

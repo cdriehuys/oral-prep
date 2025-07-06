@@ -5,5 +5,8 @@ __pycache__
 # Database
 *.sqlite3
 
+# Collected (not source) static files
+oralprep/staticfiles
+
 # User-uploaded files
 oral_prep/media

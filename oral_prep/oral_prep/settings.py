@@ -13,6 +13,13 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 
+
+def env_list(variable_name: str) -> list[str]:
+    raw = os.environ.get(variable_name, "")
+
+    return [p.strip() for p in raw.split(",") if p.strip()]
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -27,7 +34,7 @@ if not SECRET_KEY and DEBUG:
     SECRET_KEY = "django-insecure-96_gdeb9)^*!0-axb%w8(%y@s5-=(jor%d7sv1x&3dodo(@p8$"
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env_list("ORALPREP_ALLOWED_HOSTS")
 
 
 # Application definition
@@ -53,6 +60,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "allauth.account.middleware.AccountMiddleware",
 ]
 
@@ -82,7 +90,8 @@ WSGI_APPLICATION = "oral_prep.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "NAME": Path(os.environ.get("ORALPREP_DATA_DIRECTORY", BASE_DIR))
+        / "db.sqlite3",
     }
 }
 
@@ -149,9 +158,20 @@ MEDIA_URL = "/media/"
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 STATIC_URL = "static/"
 
 STATICFILES_DIRS = [BASE_DIR / "static"]
+
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -161,12 +181,45 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Email
 
+DEFAULT_FROM_EMAIL = os.environ.get("ORALPREP_NO_REPLY_EMAIL", "no-reply@localhost")
+EMAIL_SUBJECT_PREFIX = ""
+
 if os.environ.get("ORALPREP_EMAIL_CONSOLE", "false").lower() == "true":
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+else:
+    EMAIL_BACKEND = "postmarker.django.EmailBackend"
+    POSTMARK = {
+        "TOKEN": os.environ.get("ORALPREP_POSTMARK_TOKEN"),
+        "TEST_MODE": False,
+        "VERBOSITY": 0,
+    }
+
+
+# Security
+
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+
+# Logging
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "WARNING",
+    },
+}
 
 
 # Allauth
 
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_SIGNUP_FIELDS = ["email*", "password1*"]
 ACCOUNT_LOGIN_METHODS = {"email"}
