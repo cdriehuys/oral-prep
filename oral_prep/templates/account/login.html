@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Sign In{% endblock %}
+
+{% block content %}
+  <main class="container container--sm">
+    <h1 class="title">Sign In</h1>
+
+    <p class="prose">
+      If you don't have an account, please
+      <a href='{% url "account_signup" %}'>sign up</a>.
+    </p>
+
+    {% if form.non_field_errors %}
+      <div class="form-errors">
+        {{ form.non_field_errors }}
+      </div>
+    {% endif %}
+
+    <form action="{% url 'account_login' %}" method="POST">
+      {% csrf_token %}
+
+      <div class="form-field">
+        {{ form.login.as_field_group }}
+      </div>
+      <div class="form-field">
+        {{ form.password.as_field_group }}
+      </div>
+      <div class="form-field">
+        {{ form.remember.as_field_group }}
+      </div>
+
+      <button class="btn btn--lg btn--primary" type="submit">Sign In</button>
+    </form>
+  </main>
+{% endblock content %}

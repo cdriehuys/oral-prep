@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+  <main class="container container--sm">
+    <h1 class="title">Sign Up</h1>
+    <p class="prose">
+      Access to the Oral Prep Tool is free to use by everyone. I ask users to
+      register only so settings can be customized to your training situation
+      (i.e. private vs commercial, aircraft type, etc.). Access is granted
+      through a combination of your email and password, and emails are
+      verified during registration.
+    </p>
+
+    <p class="prose">
+      If you already have an account, please
+      <a href='{% url "account_login" %}'>sign in</a>.
+    </p>
+
+    {% if form.non_field_errors %}
+      <div class="form-errors">
+        {{ form.non_field_errors }}
+      </div>
+    {% endif %}
+
+    <form action="{% url 'account_signup' %}" method="POST">
+      {% csrf_token %}
+      {# Honeypot field #}
+      <div class="no-overflow">
+        {{ form.address }}
+      </div>
+
+      <div class="form-field">
+        {{ form.email.as_field_group }}
+      </div>
+      <div class="form-field">
+        {{ form.password1.as_field_group }}
+      </div>
+
+      <button class="btn btn--lg btn--primary" type="submit">Sign Up</button>
+    </form>
+  </main>
+{% endblock content %}

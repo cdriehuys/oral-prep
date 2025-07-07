@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 
+from django.forms.renderers import TemplatesSetting
+
 
 def env_list(variable_name: str) -> list[str]:
     raw = os.environ.get(variable_name, "")
@@ -46,6 +48,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.forms",
     "allauth",
     "allauth.account",
     "core",
@@ -173,6 +176,7 @@ STORAGES = {
     },
 }
 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
@@ -222,9 +226,20 @@ LOGGING = {
 }
 
 
+# Form Rendering
+
+
+class FormRenderer(TemplatesSetting):
+    field_template_name = "core/field_snippet.html"
+
+
+FORM_RENDERER = "oral_prep.settings.FormRenderer"
+
+
 # Allauth
 
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_SIGNUP_FIELDS = ["email*", "password1*"]
+ACCOUNT_SIGNUP_FORM_HONEYPOT_FIELD = "address"
 ACCOUNT_LOGIN_METHODS = {"email"}
