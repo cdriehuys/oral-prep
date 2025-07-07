@@ -152,7 +152,7 @@ USE_TZ = True
 
 MEDIA_ROOT = os.environ.get("ORALPREP_MEDIA_ROOT", BASE_DIR / "media")
 
-MEDIA_URL = "/media/"
+MEDIA_URL = os.environ.get("ORALPREP_MEDIA_URL", "/media/")
 
 
 # Static files (CSS, JavaScript, Images)
@@ -198,6 +198,11 @@ else:
 # Security
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+if os.environ.get("ORALPREP_SSL", "false").lower() == "true":
+    CSRF_COOKIE_SECURE = True
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
 
 
 # Logging
