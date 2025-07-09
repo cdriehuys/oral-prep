@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 
@@ -32,6 +33,9 @@ class Question(models.Model):
     import_id = models.IntegerField(
         blank=True, null=True, unique=True, verbose_name=_("import ID")
     )
+
+    def get_absolute_url(self):
+        return reverse("question-detail", kwargs={"question_id": self.id})
 
 
 class Preferences(models.Model):

@@ -21,6 +21,7 @@
         <ul class="navlinks">
           {% if request.user.is_authenticated %}
           {% navlink "Home" "home" %}
+          {% navlink "Search" "search" %}
           {% navlink "Preferences" "preferences" %}
           {% endif %}
           {% navlink "About" "about" %}

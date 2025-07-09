@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Search{% endblock title %}
+
+{% block content %}
+  <main class="container">
+    <h1 class="title">Search</h1>
+
+    <section class="section">
+      {% if form.non_field_errors %}
+        <div class="form-errors">
+          {{ form.non_field_errors }}
+        </div>
+      {% endif %}
+
+      <form method="GET">
+        <div class="form-field">
+          {{ form.q.as_field_group }}
+        </div>
+
+        <div class="form-field">
+          {{ form.questions.as_field_group }}
+        </div>
+
+        <div class="form-field">
+          {{ form.answers.as_field_group }}
+        </div>
+
+        <button class="btn btn--lg btn--primary" type="submit">Search</button>
+      </form>
+    </section>
+
+    {% if query %}
+      <section class="section">
+        <h2 class="subtitle">Matching Questions</h2>
+
+        {% if questions %}
+          <ul>
+            {% for question in questions %}
+              <li>
+                <a href="{{ question.get_absolute_url }}">{{ question.id }}</a>:
+                {{ question.question | truncatewords:10 }}
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="prose">No questions found.</p>
+        {% endif %}
+      </section>
+    {% endif %}
+{% endblock content %}

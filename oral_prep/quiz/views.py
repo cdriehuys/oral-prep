@@ -1,7 +1,8 @@
 import random
 
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.db.models import Q
+from django.shortcuts import get_object_or_404, render
 
 from quiz import forms, models
 
@@ -35,3 +36,38 @@ def preferences_view(request):
     context = {"form": form}
 
     return render(request, template_name="quiz/preferences.html", context=context)
+
+
+@login_required
+def question_detail_view(request, question_id: int):
+    question = get_object_or_404(models.Question, id=question_id)
+    context = {"question": question}
+
+    return render(request, template_name="quiz/question-detail.html", context=context)
+
+
+@login_required
+def search_view(request):
+    if "q" in request.GET:
+        form = forms.SearchForm(request.GET)
+    else:
+        form = forms.SearchForm()
+
+    context = {"form": form}
+
+    if form.is_valid():
+        search_term = form.cleaned_data["q"]
+        search_questions = form.cleaned_data["questions"]
+        search_answer = form.cleaned_data["answers"]
+
+        query = Q()
+        if search_questions:
+            query |= Q(question__icontains=search_term)
+
+        if search_answer:
+            query |= Q(answer__icontains=search_term)
+
+        context["query"] = search_term
+        context["questions"] = models.Question.objects.filter(query).order_by("id")
+
+    return render(request, template_name="quiz/search.html", context=context)

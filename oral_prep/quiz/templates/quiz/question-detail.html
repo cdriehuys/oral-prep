@@ -1,17 +1,15 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+
 {% load markdown_extras %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Question {{ question.id }}{% endblock title %}
 
 {% block content %}
   <main class="container">
-    <h1 class="title">Oral Exam Prep</h1>
+    <h1 class="title">Question {{ question.id }}</h1>
 
     <section class="section">
-      <div class="row">
-        <h2 class="subtitle">Question</h2>
-        <a class="btn btn--primary" href='{% url "home" %}'>New</a>
-      </div>
+      <h2 class="subtitle">Question</h2>
       <div class="markdown">{{ question.question | markdown | safe }}</div>
 
       {% if question.image %}
@@ -26,9 +24,5 @@
         {{ question.answer | markdown | safe }}
       </details>
     </section>
-
-    <section class="section">
-      <a href="{{ question.get_absolute_url }}">Permalink</a>
-    </section>
   </main>
-{% endblock %}
+{% endblock content %}

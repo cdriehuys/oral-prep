@@ -27,6 +27,10 @@
   --spacing-lg: 2em;
 }
 
+a {
+  color: var(--color-primary);
+}
+
 body {
   font-family: var(--font-family-body);
 }
@@ -107,10 +111,6 @@ h1, h2, h3, h4, h5, h6 {
 .form-help {
   color: var(--color-text-subtle);
   font-size: var(--font-size-sm);
-}
-
-.form-help a {
-  color: var(--color-primary);
 }
 
 .form-help li {
@@ -195,10 +195,6 @@ input[type=radio] + .form-label {
 .prose {
   line-height: 1.618;
   margin-bottom: var(--spacing-md);
-}
-
-.prose a {
-  color: var(--color-primary);
 }
 
 .row {
