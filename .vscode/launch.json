@@ -16,7 +16,9 @@
             "program": "${workspaceFolder}/oral_prep/manage.py",
             "env": {
                 "ORALPREP_DISABLE_PASSWORD_VALIDATION": "true",
-                "ORALPREP_EMAIL_CONSOLE": "true"
+                "ORALPREP_EMAIL_CONSOLE": "true",
+                "ORALPREP_MAINTAINER_EMAIL": "test@localhost",
+                "ORALPREP_MAINTAINER_NAME": "Oral Prep"
             }
         }
     ]

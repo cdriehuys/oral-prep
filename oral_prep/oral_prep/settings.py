@@ -79,6 +79,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "core.context_processors.maintainer_info",
             ],
         },
     },
@@ -243,3 +244,9 @@ ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_SIGNUP_FIELDS = ["email*", "password1*"]
 ACCOUNT_SIGNUP_FORM_HONEYPOT_FIELD = "address"
 ACCOUNT_LOGIN_METHODS = {"email"}
+
+
+# Contact Info
+
+MAINTAINER_EMAIL = os.environ.get("ORALPREP_MAINTAINER_EMAIL")
+MAINTAINER_NAME = os.environ.get("ORALPREP_MAINTAINER_NAME")

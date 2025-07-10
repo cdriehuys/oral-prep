@@ -27,12 +27,14 @@
       there with the temerity to question your knowledge.
     </p>
 
-    <p class="prose">
-      If you see an error (typo, wrong or incomplete answer, etc.) please send
-      feedback to
-      <a href="mailto:chathan@driehuys.com" target="_blank">Chathan Driehuys</a>.
-      All constructive feedback is welcome.
-    </p>
+    {% if MAINTAINER_NAME and MAINTAINER_EMAIL %}
+      <p class="prose">
+        If you see an error (typo, wrong or incomplete answer, etc.) please send
+        feedback to
+        <a href="mailto:{{ MAINTAINER_EMAIL }}" target="_blank">{{ MAINTAINER_NAME }}</a>.
+        All constructive feedback is welcome.
+      </p>
+    {% endif %}
 
     <p class="prose">
       This tool is built with <em>Django</em>, a Python framework.
