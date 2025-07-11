@@ -17,11 +17,20 @@ dependencies = [
 [dependency-groups]
 dev = [
     "pre-commit>=4.2.0",
+    "pytest>=8.4.1",
+    "pytest-django>=4.11.1",
     "ruff>=0.12.2",
 ]
 
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "oral_prep.settings"
+python_files = ["test_*.py", "*_test.py", "testing/python/*.py"]
+pythonpath = ["oral_prep"]
+
 [tool.ruff.lint]
 extend-select = [
+    # flake8-pytest-style
+    "PT",
     # isort
     "I"
 ]
