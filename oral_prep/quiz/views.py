@@ -68,6 +68,6 @@ def search_view(request):
             query |= Q(answer__icontains=search_term)
 
         context["query"] = search_term
-        context["questions"] = models.Question.objects.filter(query).order_by("id")
+        context["questions"] = models.Question.objects.filter(query)
 
     return render(request, template_name="quiz/search.html", context=context)

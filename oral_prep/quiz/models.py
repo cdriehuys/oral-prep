@@ -34,6 +34,12 @@ class Question(models.Model):
         blank=True, null=True, unique=True, verbose_name=_("import ID")
     )
 
+    class Meta:
+        ordering = ("id",)
+
+    def __str__(self):
+        return f"Question {self.id}"
+
     def get_absolute_url(self):
         return reverse("question-detail", kwargs={"question_id": self.id})
 
