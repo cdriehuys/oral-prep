@@ -1,0 +1,14 @@
+{
+  http_port 8080
+}
+
+http://localhost:8080 {
+  handle_path /media/* {
+    root * /srv/oral-prep-media
+    file_server
+  }
+
+  handle {
+    reverse_proxy oral-prep:8000
+  }
+}

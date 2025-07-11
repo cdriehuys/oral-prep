@@ -5,6 +5,7 @@
 .venv
 .vscode
 Dockerfile
+devproxy
 
 __pycache__
 *.pyc

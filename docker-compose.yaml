@@ -1,0 +1,36 @@
+services:
+  caddy:
+    image: caddy:2.10
+    ports:
+      - 8080:8080
+    volumes:
+      - $PWD/devproxy:/etc/caddy
+      - caddy-config:/config
+      - caddy-data:/data
+      - oral-prep-media:/srv/oral-prep-media
+
+  oral-prep:
+    build:
+      context: .
+
+    environment:
+      ORALPREP_ADMIN_EMAIL: admin@localhost
+      ORALPREP_ALLOWED_HOSTS: localhost
+      ORALPREP_DATA_DIRECTORY: "/opt/oral-prep/data"
+      ORALPREP_EMAIL_CONSOLE: "true"
+      ORALPREP_MAINTAINER_EMAIL: maintainer@localhost
+      ORALPREP_MAINTAINER_NAME: Oral Prep
+      ORALPREP_MEDIA_ROOT: "/opt/oral-prep/media"
+      ORALPREP_MEDIA_URL: http://localhost:8080/media/
+      ORALPREP_NO_REPLY_EMAIL: 'Oral Prep Tool <no-reply@localhost>'
+      ORALPREP_SECRET_KEY: 'django-insecure-96_gdeb9)^*!0-axb%w8(%y@s5-=(jor%d7sv1x&3dodo(@p8$'
+
+    volumes:
+      - oral-prep-data:/opt/oral-prep/data
+      - oral-prep-media:/opt/oral-prep/media
+
+volumes:
+  caddy-data:
+  caddy-config:
+  oral-prep-data:
+  oral-prep-media:
