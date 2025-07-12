@@ -1,4 +1,4 @@
-# Oral Prep
+# Squawk Study
 
 A tool for pilots to prepare for oral exams. This is a clone of
 https://oral.planez.co.
