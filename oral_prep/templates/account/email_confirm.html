@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% load account %}
+
+{% block title %}Confirm Email Address{% endblock title %}
+
+{% block content %}
+  <main class="container container--sm">
+    <h1 class="title">Confirm Email Address</h1>
+
+    {% if confirmation %}
+      {% user_display confirmation.email_address.user as user_display %}
+      {% if can_confirm %}
+        <p class="prose">
+          Please confirm that <a href="mailto:{{ email }}">{{ email }}</a> is an
+          email address for user {{ user_display }}.
+        </p>
+
+        <form action="{{ action_url }}" method="POST">
+          {% csrf_token %}
+          <button class="btn btn--lg btn--primary">Confirm</button>
+        </form>
+      {% else %}
+        <p class="prose">
+          Unable to confirm {{ email }} because it is already confirmed by a
+          different account.
+        </p>
+      {% endif %}
+    {% else %}
+      <p class="prose">This email confirmation link expired or is invalid.</p>
+    {% endif %}
+{% endblock content %}
